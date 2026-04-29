@@ -1,25 +1,26 @@
-from typing import Any
+from typing import Any, Callable
+
 from httpx import Client, HTTPTransport, Response, Request
-from apps.nobipy.data.exceptions import NotTestedError
-from apps.nobipy.data.request_models import GetMarketHistoryRequest, GetStatsRequest, AddBankCardRequest, \
+from src.data.exceptions import NotTestedError
+from src.data.request_models import GetMarketHistoryRequest, GetStatsRequest, AddBankCardRequest, \
     GenerateWalletAddressRequest, AddBankAccountRequest, GetUserWalletsByFilteringResponse, GetBalanceRequest, \
     GetTransactionsHistoryRequest, GetOrderStatusRequest, GetSpotOrdersRequest, UpdateOrderStatusRequest, \
     CancelOrdersRequest
-from apps.nobipy.data.request_models.add_favorite_markets_request import AddFavoriteMarketsRequest
-from apps.nobipy.data.request_models.add_order_request import AddOrderRequest
-from apps.nobipy.data.request_models.get_deposits_request import GetDepositsRequest
-from apps.nobipy.data.request_models.get_trades_request import GetTradesRequest
-from apps.nobipy.data.request_models.get_wallet_transactions_request import GetWalletTransactionsRequest
-from apps.nobipy.data.response_models import GetOrderBookResponse, GetOrderBookAllResponse, GetDepthResponse, \
+from src.data.request_models.add_favorite_markets_request import AddFavoriteMarketsRequest
+from src.data.request_models.add_order_request import AddOrderRequest
+from src.data.request_models.get_deposits_request import GetDepositsRequest
+from src.data.request_models.get_trades_request import GetTradesRequest
+from src.data.request_models.get_wallet_transactions_request import GetWalletTransactionsRequest
+from src.data.response_models import GetOrderBookResponse, GetOrderBookAllResponse, GetDepthResponse, \
     TradesResponse, StatsResponse, MarketHistoryResponse, GetProfileResponse, GenerateWalletAddressResponse, OkResponse, \
     LimitationsResponse, GetWalletsListResponse, GetWalletsV2Response, BalanceResponse, WalletTransactionsResponse, \
     TransactionsHistoryResponse, WalletDepositsResponse, FavoriteMarketsResponse, GetOrderStatusResponse
-from apps.nobipy.data.response_models.add_order_response import AddOrderResponse
-from apps.nobipy.data.response_models.get_spot_orders_response import GetOrdersResponse
-from apps.nobipy.data.response_models.spot_trades_response import SpotTradesResponse
-from apps.nobipy.data.response_models.update_order_status_response import UpdateOrderStatusResponse
-from apps.nobipy.data.static_models import Routes, Resolutions
-from apps.nobipy.data.withdraw import WithdrawRequest, WithdrawResponse, WithdrawConfirmRequest, WithdrawsResponse
+from src.data.response_models.add_order_response import AddOrderResponse
+from src.data.response_models.get_spot_orders_response import GetOrdersResponse
+from src.data.response_models.spot_trades_response import SpotTradesResponse
+from src.data.response_models.update_order_status_response import UpdateOrderStatusResponse
+from src.data.static_models import Routes, Resolutions
+from src.data.withdraw import WithdrawRequest, WithdrawResponse, WithdrawConfirmRequest, WithdrawsResponse
 
 
 class ResponseHandler(HTTPTransport):

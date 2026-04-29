@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from apps.nobipy.data.abstracts import DataclassMappings
+from src.data.abstracts import DataclassMappings
 
 @dataclass
 class AddFavoriteMarketsRequest(DataclassMappings):

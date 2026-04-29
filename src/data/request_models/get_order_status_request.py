@@ -1,7 +1,7 @@
 from dataclasses import dataclass,asdict
 from typing import Any
 
-from apps.nobipy.data.abstracts import DataclassMappings
+from src.data.abstracts import DataclassMappings
 
 @dataclass
 class GetOrderStatusRequest(DataclassMappings):

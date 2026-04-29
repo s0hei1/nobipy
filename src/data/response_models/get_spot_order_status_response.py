@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Literal
 
-from apps.nobipy.data.abstracts import DataclassMappings
+from src.data.abstracts import DataclassMappings
 
 OrderSide = Literal['sell', 'buy']
 OrderStatus = Literal['Active', 'Done', 'Inactive', 'Canceled']

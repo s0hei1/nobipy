@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from apps.nobipy.data.abstracts import DataclassMappings
+from src.data.abstracts import DataclassMappings
 from typing import Literal
 
 WalletType = Literal['margin', 'spot']

@@ -1,6 +1,6 @@
 from __future__ import annotations
 from datetime import datetime
-from apps.nobipy.data.abstracts import DataclassMappings
+from src.data.abstracts import DataclassMappings
 from typing import Literal
 from dataclasses import dataclass
 

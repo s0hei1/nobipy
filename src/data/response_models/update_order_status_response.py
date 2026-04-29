@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from apps.nobipy.data.response_models.get_spot_orders_response import OrderEntry
+from src.data.response_models.get_spot_orders_response import OrderEntry
 
 
 @dataclass

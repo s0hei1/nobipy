@@ -1,10 +1,10 @@
 import pytest
 from random import choice, random
-from apps.nobipy.api_client import nobitex_client_factory, APIClient, url_printer_event_hook, \
+from src.api_client import nobitex_client_factory, APIClient, url_printer_event_hook, \
     response_status_code_printer_event_hook
-from apps.nobipy.data.static_models import Resolutions
-from apps.nobipy.data.static_models.resolution import Resolution
-from apps.nobipy.token import TOKEN
+from src.data.static_models import Resolutions
+from src.data.static_models.resolution import Resolution
+from src.token import TOKEN
 
 
 @pytest.fixture

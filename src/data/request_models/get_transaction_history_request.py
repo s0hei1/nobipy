@@ -1,5 +1,5 @@
 from dataclasses import dataclass, asdict
-from apps.nobipy.data.abstracts import DataclassMappings
+from src.data.abstracts import DataclassMappings
 from typing import Literal
 from datetime import datetime
 
