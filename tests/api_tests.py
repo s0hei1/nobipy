@@ -1,16 +1,16 @@
 import pytest
 from httpx import Client
 from src.api_client import APIClient
-from src.data.request_models import GetStatsRequest, GetMarketHistoryRequest, GetUserWalletsByFilteringResponse, \
+from src.models import GetStatsRequest, GetMarketHistoryRequest, GetUserWalletsByFilteringResponse, \
     GetBalanceRequest, GetTransactionsHistoryRequest, GetOrderStatusRequest, GetSpotOrdersRequest, \
     UpdateOrderStatusRequest, CancelOrdersRequest
-from src.data.request_models.add_favorite_markets_request import AddFavoriteMarketsRequest
-from src.data.request_models.add_order_request import AddOrderRequest
-from src.data.request_models.generate_wallet_address_request import GenerateWalletAddressRequest
-from src.data.request_models.get_deposits_request import GetDepositsRequest
-from src.data.request_models.get_trades_request import GetTradesRequest
-from src.data.request_models.get_wallet_transactions_request import GetWalletTransactionsRequest
-from src.data.static_models import Resolutions
+from src.models import AddFavoriteMarketsRequest
+from src.models import AddOrderRequest
+from src.models import GenerateWalletAddressRequest
+from src.models import GetDepositsRequest
+from src.models import GetTradesRequest
+from src.models import GetWalletTransactionsRequest
+from src.models.static_models import Resolutions
 from fixtures import client,get_symbols,any_symbol
 import datetime as dt
 

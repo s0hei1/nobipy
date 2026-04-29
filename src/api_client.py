@@ -1,26 +1,18 @@
 from typing import Any, Callable
-
 from httpx import Client, HTTPTransport, Response, Request
-from src.data.exceptions import NotTestedError
-from src.data.request_models import GetMarketHistoryRequest, GetStatsRequest, AddBankCardRequest, \
+from src.models.exceptions import NotTestedError
+from src.models import GetMarketHistoryRequest, GetStatsRequest, AddBankCardRequest, \
     GenerateWalletAddressRequest, AddBankAccountRequest, GetUserWalletsByFilteringResponse, GetBalanceRequest, \
     GetTransactionsHistoryRequest, GetOrderStatusRequest, GetSpotOrdersRequest, UpdateOrderStatusRequest, \
-    CancelOrdersRequest
-from src.data.request_models.add_favorite_markets_request import AddFavoriteMarketsRequest
-from src.data.request_models.add_order_request import AddOrderRequest
-from src.data.request_models.get_deposits_request import GetDepositsRequest
-from src.data.request_models.get_trades_request import GetTradesRequest
-from src.data.request_models.get_wallet_transactions_request import GetWalletTransactionsRequest
-from src.data.response_models import GetOrderBookResponse, GetOrderBookAllResponse, GetDepthResponse, \
+    AddFavoriteMarketsRequest, AddOrderRequest, GetDepositsRequest, GetTradesRequest, GetWalletTransactionsRequest, \
+    CancelOrdersRequest, GetOrderBookResponse, GetOrderBookAllResponse, GetDepthResponse, \
     TradesResponse, StatsResponse, MarketHistoryResponse, GetProfileResponse, GenerateWalletAddressResponse, OkResponse, \
     LimitationsResponse, GetWalletsListResponse, GetWalletsV2Response, BalanceResponse, WalletTransactionsResponse, \
-    TransactionsHistoryResponse, WalletDepositsResponse, FavoriteMarketsResponse, GetOrderStatusResponse
-from src.data.response_models.add_order_response import AddOrderResponse
-from src.data.response_models.get_spot_orders_response import GetOrdersResponse
-from src.data.response_models.spot_trades_response import SpotTradesResponse
-from src.data.response_models.update_order_status_response import UpdateOrderStatusResponse
-from src.data.static_models import Routes, Resolutions
-from src.data.withdraw import WithdrawRequest, WithdrawResponse, WithdrawConfirmRequest, WithdrawsResponse
+    AddOrderResponse, GetOrdersResponse, SpotTradesResponse, UpdateOrderStatusResponse, TransactionsHistoryResponse, \
+    WalletDepositsResponse, FavoriteMarketsResponse, GetOrderStatusResponse,WithdrawRequest, WithdrawResponse, WithdrawConfirmRequest, WithdrawsResponse
+
+from src.models.static_models import Routes
+
 
 
 class ResponseHandler(HTTPTransport):
@@ -35,15 +27,15 @@ def url_printer_event_hook(request: Request):
     print()
     print(f"REQUEST.{request.method} {request.url}")
 
+
 def response_status_code_printer_event_hook(response: Response):
     print()
     print(f"RESPONSE {response.url} STATUS CODE {response.status_code}")
     print(f"Response: {response.read()}")
 
 
-
 def nobitex_client_factory(
-        base_url : str = 'https://apiv2.nobitex.ir',
+        base_url: str = 'https://apiv2.nobitex.ir',
         token: str | None = None,
         user_agent: str | None = None,
         request_event_hooks: list[Callable[..., Any]] | None = None,
@@ -138,23 +130,23 @@ class APIClient:
         response = self.client.get(Routes.get_user_wallets_list.url)
         return GetWalletsListResponse.from_dict(response.json())
 
-    def get_user_wallets_by_filtering(self, payload : GetUserWalletsByFilteringResponse) -> GetWalletsV2Response:
+    def get_user_wallets_by_filtering(self, payload: GetUserWalletsByFilteringResponse) -> GetWalletsV2Response:
         response = self.client.get(Routes.get_user_wallets_by_filtering.url, params=payload.to_dict())
         return GetWalletsV2Response.from_dict(response.json())
 
-    def get_balance(self, payload : GetBalanceRequest) -> BalanceResponse:
+    def get_balance(self, payload: GetBalanceRequest) -> BalanceResponse:
         response = self.client.post(Routes.get_balance.url, data=payload.to_dict())
         return BalanceResponse.from_dict(response.json())
 
-    def get_wallet_transactions(self, payload : GetWalletTransactionsRequest) -> WalletTransactionsResponse:
+    def get_wallet_transactions(self, payload: GetWalletTransactionsRequest) -> WalletTransactionsResponse:
         response = self.client.get(Routes.get_user_wallet_transactions.url, params=payload.to_dict())
         return WalletTransactionsResponse.from_dict(response.json())
 
-    def get_transaction_history(self, payload : GetTransactionsHistoryRequest) -> TransactionsHistoryResponse:
+    def get_transaction_history(self, payload: GetTransactionsHistoryRequest) -> TransactionsHistoryResponse:
         response = self.client.get(Routes.get_user_transactions_history.url, params=payload.to_dict())
         return TransactionsHistoryResponse.from_dict(response.json())
 
-    def get_deposits(self, payload : GetDepositsRequest) -> WalletDepositsResponse:
+    def get_deposits(self, payload: GetDepositsRequest) -> WalletDepositsResponse:
         response = self.client.get(Routes.get_user_wallet_deposits.url, params=payload.to_dict())
         return WalletDepositsResponse.from_dict(response.json())
 
@@ -162,13 +154,13 @@ class APIClient:
         response = self.client.get(Routes.get_user_favorite_markets.url)
         return FavoriteMarketsResponse.from_dict(response.json())
 
-    def add_favorite_markets(self, payload : AddFavoriteMarketsRequest) -> FavoriteMarketsResponse:
-        response = self.client.post(Routes.post_user_favorite_markets.url, data = payload.to_dict())
+    def add_favorite_markets(self, payload: AddFavoriteMarketsRequest) -> FavoriteMarketsResponse:
+        response = self.client.post(Routes.post_user_favorite_markets.url, data=payload.to_dict())
         return FavoriteMarketsResponse.from_dict(response.json())
 
-    def add_order(self,payload : AddOrderRequest) -> AddOrderResponse:
+    def add_order(self, payload: AddOrderRequest) -> AddOrderResponse:
         print(payload.to_dict())
-        response = self.client.post(Routes.add_order.url, data = payload.to_dict())
+        response = self.client.post(Routes.add_order.url, data=payload.to_dict())
 
         return AddOrderResponse.from_dict(response.json())
 
@@ -179,35 +171,35 @@ class APIClient:
         )
         return GetOrderStatusResponse.from_dict(response.json())
 
-    def get_spot_orders(self, payload : GetSpotOrdersRequest) -> GetOrdersResponse:
+    def get_spot_orders(self, payload: GetSpotOrdersRequest) -> GetOrdersResponse:
         response = self.client.get(
             Routes.get_spot_orders.url,
             params=payload.to_dict()
         )
         return GetOrdersResponse.from_dict(response.json())
 
-    def update_order(self, payload : UpdateOrderStatusRequest) -> UpdateOrderStatusResponse:
+    def update_order(self, payload: UpdateOrderStatusRequest) -> UpdateOrderStatusResponse:
         response = self.client.post(
             Routes.update_order_status.url,
             data=payload.to_dict()
         )
         return UpdateOrderStatusResponse.from_dict(response.json())
 
-    def cancel_orders(self, payload : CancelOrdersRequest) -> OkResponse:
+    def cancel_orders(self, payload: CancelOrdersRequest) -> OkResponse:
         response = self.client.post(
             Routes.cancel_orders.url,
             data=payload.to_dict()
         )
         return OkResponse.from_dict(response.json())
 
-    def get_spot_traded(self, payload : GetTradesRequest) -> SpotTradesResponse:
+    def get_spot_traded(self, payload: GetTradesRequest) -> SpotTradesResponse:
         response = self.client.get(
             Routes.get_spot_trades.url,
             params=payload.to_dict()
         )
         return SpotTradesResponse.from_dict(response.json())
 
-    def withdraw_request(self, payload : WithdrawRequest) -> WithdrawResponse:
+    def withdraw_request(self, payload: WithdrawRequest) -> WithdrawResponse:
         raise NotTestedError("This Method is not Tested")
         response = self.client.post(
             Routes.withdraw_request.url,
@@ -215,7 +207,7 @@ class APIClient:
         )
         return WithdrawResponse.from_dict(response.json())
 
-    def withdraw_request_confirm(self, payload : WithdrawConfirmRequest) -> WithdrawResponse:
+    def withdraw_request_confirm(self, payload: WithdrawConfirmRequest) -> WithdrawResponse:
         raise NotTestedError("This Method is not Tested")
         response = self.client.post(
             Routes.withdraw_request_confirm.url,
@@ -223,7 +215,7 @@ class APIClient:
         )
         return WithdrawResponse.from_dict(response.json())
 
-    def get_withdraw(self, withdraw : int) -> WithdrawResponse:
+    def get_withdraw(self, withdraw: int) -> WithdrawResponse:
         raise NotTestedError("This Method is not Tested")
         response = self.client.get(
             Routes.get_withdraw_details.url_with_path_parameter(str(withdraw))

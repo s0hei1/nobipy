@@ -1,5 +1,45 @@
 from __future__ import annotations
-from dataclasses import dataclass
+from dataclasses import dataclass,asdict
+from src.models.abstracts import DataclassMappings
+
+@dataclass
+class GetMarketHistoryRequest(DataclassMappings):
+    symbol : str
+    resolution : str
+    to : int
+    page  : int
+    from_ : int | None = None
+    countback : int | None = None
+
+    def to_dict(self):
+        d = asdict(self)
+        d['from'] = d.pop('from_')
+        return d
+
+
+
+@dataclass
+class MarketHistoryResponse:
+    s: str
+    t: list[int]
+    o: list[int]
+    h: list[int]
+    l: list[int]
+    c: list[int]
+    v: list[float]
+
+    @staticmethod
+    def from_dict(data: dict) -> MarketHistoryResponse:
+        return MarketHistoryResponse(
+                s=data["s"],
+                t=data["t"],
+                o=data["o"],
+                h=data["h"],
+                l=data["l"],
+                c=data["c"],
+                v=data["v"],
+            )
+
 
 @dataclass
 class OrderBookEntry:
@@ -48,14 +88,13 @@ class GetOrderBookAllResponse:
                 ) for d in data},
         )
 
-
 @dataclass
 class GetDepthResponse:
     status: str
     lastUpdate: int
     lastTradePrice: str
-    asks: List[OrderBookEntry]
-    bids: List[OrderBookEntry]
+    asks: list[OrderBookEntry]
+    bids: list[OrderBookEntry]
 
     @staticmethod
     def from_dict(data: dict) -> GetDepthResponse:

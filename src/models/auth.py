@@ -1,6 +1,6 @@
 from dataclasses import dataclass,field
 from typing import Literal
-from src.data.abstracts import DataclassMappings
+from src.models.abstracts import DataclassMappings
 from datetime import datetime
 
 APIKeyPermissionType = Literal['READ', 'RADE', 'WITHDRAW']

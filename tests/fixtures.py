@@ -2,8 +2,8 @@ import pytest
 from random import choice, random
 from src.api_client import nobitex_client_factory, APIClient, url_printer_event_hook, \
     response_status_code_printer_event_hook
-from src.data.static_models import Resolutions
-from src.data.static_models.resolution import Resolution
+from src.models.static_models import Resolutions
+from src.models.static_models.resolution import Resolution
 from src.token import TOKEN
 
 
