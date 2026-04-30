@@ -4,7 +4,7 @@ from src.api_client import nobitex_client_factory, APIClient, url_printer_event_
     response_status_code_printer_event_hook
 from src.models.static_models import Resolutions
 from src.models.static_models.resolution import Resolution
-from src.token import TOKEN
+from src.my_token import TOKEN
 
 
 @pytest.fixture

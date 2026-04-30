@@ -9,7 +9,7 @@ PrivacyType = Literal['private', 'public']
 class Route:
     url : str
     privacy_type : PrivacyType
-    http_method : HTTPMethod
+    http_method : HTTPMethod | None
     doc : str | None = None
 
     def url_with_path_parameter(self,path_parameter : str) -> str:

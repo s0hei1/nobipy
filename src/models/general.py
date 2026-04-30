@@ -55,9 +55,9 @@ class GetOrderBookResponse:
     bids: list[OrderBookEntry]
 
     @staticmethod
-    def from_dict(data: dict) -> GetOrderBookResponse:
+    def from_dict(data: dict, using_web_sockets : bool = False) -> GetOrderBookResponse:
         return GetOrderBookResponse(
-            status=data["status"],
+            status='ok' if using_web_sockets else data["status"],
             lastUpdate=data["lastUpdate"],
             lastTradePrice=data["lastTradePrice"],
             asks=[OrderBookEntry(price=a[0], amount=a[1]) for a in data["asks"]],
